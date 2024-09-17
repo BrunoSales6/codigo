@@ -439,12 +439,19 @@ class Main(QMainWindow, FORM_CLASS):
         total=soma_servicos+soma_pecas
 
         with open(f"{nome}.txt", "w") as file:
+            file.write("STOCK CAR LTDA\n")
+            file.write("CNPJ: 47.546.538/0001-60.\n")
+            file.write("Rua das Flores, 123, Bairro Centro, Juazeiro do Norte, CE\n")
+            file.write("CEP: 63000-000\n")
+            file.write("-------------------------------------------------------------\n")
             file.write(f"Nome: {nome}\n")
             file.write(f"Telefone: {telefone}\n")
-            file.write("Peças usadas: " + ", ".join(lista_pecas) + "\n")
-            file.write("Serviços feitos:" + ", ".join(lista_servicos)+ "\n")
-            file.write(f"Total a pagar: {total}\n")
-            file.write("Observação: " + obs)
+            file.write("-------------------------------------------------------------\n")
+            file.write("Produtos usados: " + ", ".join([f"{peca} ({quant})" for peca,quant in zip(lista_pecas,lista_quantidade)]) + "\n")
+            file.write("Serviços feitos: " + ", ".join(lista_servicos)+ "\n")
+            file.write(f"Total a pagar (R$): {total}\n")
+            file.write("-------------------------------------------------------------\n")
+            file.write("Observação: \n" + obs)
         
 
 
