@@ -439,7 +439,7 @@ class Main(QMainWindow, FORM_CLASS):
         total=soma_servicos+soma_pecas
 
         with open(f"{nome}.txt", "w") as file:
-            file.write("                   STOCK CAR LTDA\n")
+            file.write("                      STOCK CAR LTDA\n")
             file.write("CNPJ: 47.546.538/0001-60\n")
             file.write("Rua das Flores, 123, Bairro Centro, Juazeiro do Norte, CE\n")
             file.write("CEP: 63000-000\n")
