@@ -448,11 +448,6 @@ class Main(QMainWindow, FORM_CLASS):
             file.write("Rua das Flores, 123, Bairro Centro, Juazeiro do Norte, CE\n")
             file.write("CEP: 63000-000\n")
             file.write("-------------------------------------------------------------\n")
-            file.write("                      STOCK CAR LTDA\n")
-            file.write("CNPJ: 47.546.538/0001-60\n")
-            file.write("Rua das Flores, 123, Bairro Centro, Juazeiro do Norte, CE\n")
-            file.write("CEP: 63000-000\n")
-            file.write("-------------------------------------------------------------\n")
             file.write(f"Nome: {nome}\n")
             file.write(f"Telefone: {telefone}\n")
             file.write(f"Placa: {placa}\n")
@@ -464,21 +459,6 @@ class Main(QMainWindow, FORM_CLASS):
             file.write("-------------------------------------------------------------\n")
             file.write("Produtos usados:\n")
             for peca, quant in zip(lista_pecas, lista_quantidade_pecas):
-                file.write(f"  - {peca}: {quant}\n")
-            file.write("-------------------------------------------------------------\n")
-            
-            file.write(f"Total a pagar (R$): {total:.2f}\n")
-            file.write("-------------------------------------------------------------\n")
-            file.write("Observação:\n")
-            file.write(obs + "\n")
-            file.write("-------------------------------------------------------------\n")
-            file.write("-------------------------------------------------------------\n")
-            file.write("Serviços feitos:\n")
-            for servico in lista_servicos:
-                file.write(f"  - {servico}\n")
-            file.write("-------------------------------------------------------------\n")
-            file.write("Produtos usados:\n")
-            for peca, quant in zip(lista_pecas, lista_quantidade):
                 file.write(f"  - {peca}: {quant}\n")
             file.write("-------------------------------------------------------------\n")
             
