@@ -385,6 +385,8 @@ class Main(QMainWindow, FORM_CLASS):
         dbServico=sqlite3.connect(resource_path("servicos.db"))
         cursoServico=dbServico.cursor()
         cursoPeca=dbPeca.cursor()
+        placa=self.placa_cliente.text()
+        modelo=self.modelo_carro.text()
         nome=self.nome_cliente.text()
         telefone=self.telefone_cliente.text()
         materiais=self.input_materiais.text()
@@ -395,6 +397,7 @@ class Main(QMainWindow, FORM_CLASS):
         total=0
         lista_servicos=[]
         lista_pecas=[]
+        lista_quantidade_pecas=[]
 
         if not nome or not telefone or not materiais or not servico:
             print("Erro: Todos os campos devem ser preenchidos.")
@@ -405,6 +408,7 @@ class Main(QMainWindow, FORM_CLASS):
             for material in materiais_processados:
                 quantidade,ref=material.split(",")
                 quantidade=int(quantidade.strip())
+                lista_quantidade_pecas.append(quantidade)
                 ref=ref.strip()
                 comand_Update='''UPDATE peças_carro SET Quantidade = Quantidade - ? WHERE Referência =?'''
                 comand_Select='''SELECT Preço FROM peças_carro WHERE Referência=?'''
@@ -439,12 +443,30 @@ class Main(QMainWindow, FORM_CLASS):
         total=soma_servicos+soma_pecas
 
         with open(f"{nome}.txt", "w") as file:
+            file.write("                      STOCK CAR LTDA\n")
+            file.write("CNPJ: 47.546.538/0001-60\n")
+            file.write("Rua das Flores, 123, Bairro Centro, Juazeiro do Norte, CE\n")
+            file.write("CEP: 63000-000\n")
+            file.write("-------------------------------------------------------------\n")
             file.write(f"Nome: {nome}\n")
             file.write(f"Telefone: {telefone}\n")
-            file.write("Peças usadas: " + ", ".join(lista_pecas) + "\n")
-            file.write("Serviços feitos:" + ", ".join(lista_servicos)+ "\n")
-            file.write(f"Total a pagar: {total}\n")
-            file.write("Observação: " + obs)
+            file.write(f"Placa: {placa}\n")
+            file.write(f"Marca/Cor: {modelo}\n")
+            file.write("-------------------------------------------------------------\n")
+            file.write("Serviços feitos:\n")
+            for servico in lista_servicos:
+                file.write(f"  - {servico}\n")
+            file.write("-------------------------------------------------------------\n")
+            file.write("Produtos usados:\n")
+            for peca, quant in zip(lista_pecas, lista_quantidade_pecas):
+                file.write(f"  - {peca}: {quant}\n")
+            file.write("-------------------------------------------------------------\n")
+            
+            file.write(f"Total a pagar (R$): {total:.2f}\n")
+            file.write("-------------------------------------------------------------\n")
+            file.write("Observação:\n")
+            file.write(obs + "\n")
+            file.write("-------------------------------------------------------------\n")
         
 
 
